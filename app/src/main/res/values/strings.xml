@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Easy_Flights</string>
+    <string name="mainFlightOrigin">Enter Origin</string>
+    <string name="mainDestinationHint">Enter Destination</string>
+    <string name="mainDateHint">Enter Date</string>
+    <string name="mainSubmitButton">Search</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="search_results_Title">Search Results:</string>
+</resources>
