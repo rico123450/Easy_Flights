@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Easy_Flights"
         tools:targetApi="31">
         <activity
+            android:name=".FlightSearchResultsActivity"
+            android:exported="false" />
+        <activity
             android:name=".AccountInfoActivity"
             android:exported="false" />
         <activity
