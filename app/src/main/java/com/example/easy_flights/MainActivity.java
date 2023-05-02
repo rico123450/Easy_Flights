@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Flight searchedFlight=getSearchFlight();
-                Intent intent=SearchResultsActivity.intentFactory(getApplicationContext(),searchedFlight);
+                System.out.println(searchedFlight);
+                Intent intent=SearchResultsActivity.intentFactory(getApplicationContext(),searchedFlight.getDestination(),searchedFlight.getOrigin(),searchedFlight.getDate(),mUser.getUserName());
                 startActivity(intent);
 
                 //submitFlight();

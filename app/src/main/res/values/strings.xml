@@ -11,4 +11,5 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="search_results_Title">Search Results:</string>
+    <string name="bookFlight">Book flight?</string>
 </resources>
