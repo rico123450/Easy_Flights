@@ -35,7 +35,14 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         mFlightDAO = AppDataBase.getInstance(getApplicationContext()).FlightDAO();
         searchedFlight=new Flight(FLIGHT_DESTINATION_KEY,FLIGHT_ORIGIN_KEY,FLIGHT_DATE_KEY);
-        mFlightList = mFlightDAO.getFlights();
+        System.out.println(searchedFlight.getDate());
+        if(searchedFlight.getDate().equals("")){
+            mFlightList = mFlightDAO.getFlightByDestinationOrigin(searchedFlight.getDestination(), searchedFlight.getOrigin());
+        }else{
+            mFlightList=mFlightDAO.getFlights();
+        }
+
+
 
         //sortFlightList();
 

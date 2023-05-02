@@ -29,6 +29,9 @@ public interface FlightDAO {
     @Query("SELECT * FROM "+ AppDataBase.FLIGHT_TABLE + " WHERE mFlightId = :flightId")
     List<Flight> getFlightById(int flightId);
 
+    @Query("SELECT * FROM "+ AppDataBase.FLIGHT_TABLE+" WHERE mDestination LIKE :destination AND mOrigin LIKE :origin")
+    List<Flight> getFlightByDestinationOrigin(String destination,String origin);
+
     @Insert
     void insert(User...users);
 
