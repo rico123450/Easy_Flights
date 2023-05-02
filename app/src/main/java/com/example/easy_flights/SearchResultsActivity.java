@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SearchResultsActivity extends AppCompatActivity {
 
-    List<Flight> mFlightList;
+    private List<Flight> mFlightList;
 
     private Flight searchedFlight;
     private FlightDAO mFlightDAO;
@@ -32,12 +32,14 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
-        mListView = (ListView) findViewById(R.id.flightSearchResults);
+
         mFlightDAO = AppDataBase.getInstance(getApplicationContext()).FlightDAO();
         searchedFlight=new Flight(FLIGHT_DESTINATION_KEY,FLIGHT_ORIGIN_KEY,FLIGHT_DATE_KEY);
         mFlightList = mFlightDAO.getFlights();
 
-        sortFlightList();
+        //sortFlightList();
+
+        mListView = (ListView) findViewById(R.id.flightSearchResults);
 
 
         ArrayAdapter<Flight>arrayAdapter = new ArrayAdapter(this,R.layout.activity_flight_search_results,R.id.textView_SearchResults,mFlightList);
@@ -52,10 +54,21 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     private void sortFlightList() {
+        String searchedFlightDest=searchedFlight.getDestination().toLowerCase().trim();
+        String searchedFlightOrigin=searchedFlight.getOrigin().toLowerCase().trim();
+        String searchedFlightDate=searchedFlight.getDate().toLowerCase().trim();
+
+
+
         for(Flight f:mFlightList){
-            if(f.getOrigin().equals(searchedFlight.getOrigin())) {
-                if(f.getDestination().equals(searchedFlight.getDestination())) {
-                    if (f.getDate().equals(searchedFlight.getDate())) {
+            String fCleanedDest = f.getDestination().toLowerCase().trim();
+            String fCleanedOrigin = f.getOrigin().toLowerCase().trim();
+            String fCleanedDate = f.getDate().toLowerCase().trim();
+
+
+            if(fCleanedOrigin.equals(searchedFlightOrigin)) {
+                if(fCleanedDest.equals(searchedFlightDest)) {
+                    if (fCleanedDate.equals(searchedFlightDate)) {
                         Flight temp = new Flight(f.getDestination(), f.getOrigin(), f.getDate());
                         mFlightList.remove(f);
                         mFlightList.add(0, temp);
