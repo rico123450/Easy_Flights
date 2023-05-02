@@ -6,10 +6,11 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.easy_flights.Booking;
 import com.example.easy_flights.Flight;
 import com.example.easy_flights.User;
 
-@Database(entities = {Flight.class, User.class},version = 3)
+@Database(entities = {Flight.class, User.class, Booking.class},version = 4)
 public abstract class AppDataBase extends RoomDatabase {
     public static final String FLIGHT_TABLE = "flight_table";
     public static final String DATABASE_NAME ="Flight.DB";

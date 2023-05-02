@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.easy_flights.Booking;
 import com.example.easy_flights.Flight;
 import com.example.easy_flights.User;
 
@@ -49,6 +50,15 @@ public interface FlightDAO {
 
     @Query("SELECT * FROM " + AppDataBase.USER_TABLE+ " WHERE mUserId = :userId")
     User getUserByUserId(int userId);
+
+
+    @Insert
+    void insert(Booking...bookings);
+    @Update
+    void update(Booking...bookings);
+
+    @Delete
+    void delete(Booking booking);
 
 
 }
