@@ -230,8 +230,8 @@ public class MainActivity extends AppCompatActivity {
 
         List<User>users = mFlightDAO.getAllUsers();
         if(users.size() <=0){
-            User defaultUser =  new User("testuser1","123");
-            User altUser = new User("admin2", "123");
+            User defaultUser =  new User("testuser1","123",false);
+            User altUser = new User("admin2", "123",true);
             mFlightDAO.insert(defaultUser);
             mFlightDAO.insert(altUser);
         }
