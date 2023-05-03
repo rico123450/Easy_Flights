@@ -10,5 +10,6 @@ public class FlightSearchResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_search_results);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

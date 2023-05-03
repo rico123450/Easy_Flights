@@ -24,9 +24,9 @@ import java.util.List;
 //TODO:IMPLEMENT BACK BUTTON,DATE SEARCH.
 public class SearchResultsActivity extends AppCompatActivity {
 
-    private static final String USER_ID_KEY = " com.example.easy_flights.userIdKey";
+    private static final String USER_ID_KEY = "com.example.easy_flights.userIdKey";
 
-    private static final String PREFERENCE_KEY = " com.example.easy_flights.PREFERENCE_KEY";
+    private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
 
     private List<Flight> mFlightList;
 
@@ -53,7 +53,6 @@ public class SearchResultsActivity extends AppCompatActivity {
     private User mUser;
 
 
-
      //SearchResultsActivity SearchBinding;
 
 
@@ -62,6 +61,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+        getPrefs();
        // SearchBinding=FlightSearchResultsActivity.inflate(getLayoutInflater());
        // SearchBinding=FlightSearchResultsActivity.inflate(getLayoutInflater());
         //backButton=SearchBinding.backButton;
@@ -80,7 +80,8 @@ public class SearchResultsActivity extends AppCompatActivity {
 //        System.out.println("FLIGHT_DESTINATION_KEY:\n"+FLIGHT_DESTINATION_KEY);
 //        System.out.println("USER_NAME_KEY_BOOKING:\n"+USER_NAME_KEY_BOOKING);
         mUser=mFlightDAO.getUserByUsername(mUsername);
-        addUserToPreference(mUser.getUserId());
+
+//        addUserToPreference(mUser.getUserId());
 
 //        System.out.println("USER IS:\n"+mUser);
 

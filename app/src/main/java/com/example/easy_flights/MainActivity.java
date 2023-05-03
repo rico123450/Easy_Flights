@@ -26,8 +26,8 @@ import com.example.easy_flights.databinding.ActivityMainBinding;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String USER_ID_KEY = " com.example.easy_flights.userIdKey";
-    private static final String PREFERENCE_KEY = " com.example.easy_flights.PREFERENCE_KEY";
+    private static final String USER_ID_KEY = "com.example.easy_flights.userIdKey";
+    private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
     private TextView mMainDisplay;
 
     private EditText mOrigin;
@@ -287,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
         }
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putInt(USER_ID_KEY,userId);
+        editor.commit();
     }
 
     private void getDataBase() {
