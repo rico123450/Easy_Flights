@@ -61,4 +61,9 @@ public interface FlightDAO {
     void delete(Booking booking);
 
 
+
+    @Query("SELECT * FROM " + AppDataBase.BOOKING_TABLE+" WHERE mUserId=:userId")
+    List<Booking> getBookingByUserId(int userId);
+
+
 }

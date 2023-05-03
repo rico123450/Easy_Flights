@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.view.MenuInflater;
 
 import com.example.easy_flights.DB.AppDataBase;
 import com.example.easy_flights.DB.FlightDAO;
@@ -19,10 +21,16 @@ import com.example.easy_flights.DB.FlightDAO;
 
 import java.util.List;
 
-
+//TODO:IMPLEMENT BACK BUTTON,DATE SEARCH.
 public class SearchResultsActivity extends AppCompatActivity {
 
+    private static final String USER_ID_KEY = " com.example.easy_flights.userIdKey";
+
+    private static final String PREFERENCE_KEY = " com.example.easy_flights.PREFERENCE_KEY";
+
     private List<Flight> mFlightList;
+
+    private SharedPreferences mPreferences = null;
 
     private Flight searchedFlight;
     private FlightDAO mFlightDAO;
@@ -44,7 +52,9 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     private User mUser;
 
-    private SearchResultsActivity SearchBinding;
+
+
+     //SearchResultsActivity SearchBinding;
 
 
     ListView mListView;
@@ -52,8 +62,14 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+       // SearchBinding=FlightSearchResultsActivity.inflate(getLayoutInflater());
+       // SearchBinding=FlightSearchResultsActivity.inflate(getLayoutInflater());
         //backButton=SearchBinding.backButton;
         sortData();
+
+
+
+
 
         mFlightDAO = AppDataBase.getInstance(getApplicationContext()).FlightDAO();
 //        try{
@@ -61,10 +77,10 @@ public class SearchResultsActivity extends AppCompatActivity {
 //        }catch(NumberFormatException e){
 //            System.out.println("Could not find user");
 //        }
-
 //        System.out.println("FLIGHT_DESTINATION_KEY:\n"+FLIGHT_DESTINATION_KEY);
 //        System.out.println("USER_NAME_KEY_BOOKING:\n"+USER_NAME_KEY_BOOKING);
         mUser=mFlightDAO.getUserByUsername(mUsername);
+        addUserToPreference(mUser.getUserId());
 
 //        System.out.println("USER IS:\n"+mUser);
 
@@ -97,9 +113,11 @@ public class SearchResultsActivity extends AppCompatActivity {
 //        backButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//               finishActivity(1);
+//               Intent intent = MainActivity.intentFactory(getApplicationContext(),mUser.getUserId());
+//               startActivity(intent);
 //            }
 //        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void sortFlightList() {
@@ -166,10 +184,19 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     }
 
-    //TODO: What is quantity in relation to bookings?
+
 
     private void bookFlight(int positionOnArray){
-        Booking currentBooking= new Booking(mUser.getUserId(),mFlightList.get(positionOnArray).getFlightId(),0);
+        //TODO:QUANTITY NOT CHANGING KEEP ADDING NEW FLIGHTS
+        List<Booking> userBooking = mFlightDAO.getBookingByUserId(mUser.getUserId());
+        for(Booking booking:userBooking){
+            if(booking.getFlightID()==searchedFlight.getFlightId()){
+                booking.setQuantity(booking.getQuantity()+1);
+                return;
+            }
+        }
+        System.out.println("ENTERED OUTSIDE");
+        Booking currentBooking= new Booking(mUser.getUserId(),mFlightList.get(positionOnArray).getFlightId(),1);
         mFlightDAO.insert(currentBooking);
     }
 
@@ -190,5 +217,17 @@ public class SearchResultsActivity extends AppCompatActivity {
         mFlightOrigin=getIntent().getStringExtra(FLIGHT_ORIGIN_KEY);
         mUsername=getIntent().getStringExtra(USER_NAME_KEY_BOOKING);
         mDate=getIntent().getStringExtra(FLIGHT_DATE_KEY);
+    }
+
+    private void getPrefs() {
+        mPreferences = this.getSharedPreferences(PREFERENCE_KEY,Context.MODE_PRIVATE);
+    }
+
+    private void addUserToPreference(int userId) {
+        if(mPreferences==null){
+            getPrefs();
+        }
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(USER_ID_KEY,userId);
     }
 }
