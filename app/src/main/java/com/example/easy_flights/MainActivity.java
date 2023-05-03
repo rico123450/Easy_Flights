@@ -106,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
             mAdminButton.setVisibility(View.GONE);
             //isAdmin=false;
         }
+
+        mAdminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=AdminMenuActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     public static Intent intentFactory(Context context, int userId){
