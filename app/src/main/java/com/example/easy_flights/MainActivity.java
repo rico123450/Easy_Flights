@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,8 +26,8 @@ import com.example.easy_flights.databinding.ActivityMainBinding;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String USER_ID_KEY = " com.example.easy_flights.userIdKey";
-    private static final String PREFENCES_KEY = " com.example.easy_flights.PREFENCES_KEY";
+    private static final String USER_ID_KEY = "com.example.easy_flights.userIdKey";
+    private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
     private TextView mMainDisplay;
 
     private EditText mOrigin;
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mAdminButton;
     List<Flight> mFlightList;
+
     ActivityMainBinding binding;
 
 
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private int mUserId = -1;
 
     private SharedPreferences mPreferences = null;
+    private List<Booking> mBookingList;
     //  private User mUser;
 
     @Override
@@ -81,17 +82,18 @@ public class MainActivity extends AppCompatActivity {
         mMainDisplay.setMovementMethod(new ScrollingMovementMethod());
 //        mFlightDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME).allowMainThreadQueries().fallbackToDestructiveMigration().build().FlightDAO();
         mFlightDAO = AppDataBase.getInstance(getApplicationContext()).FlightDAO();
-        //refreshDisplay();
+        refreshDisplay();
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Flight searchedFlight=getSearchFlight();
-                Intent intent=SearchResultsActivity.intentFactory(getApplicationContext(),searchedFlight);
+                System.out.println(searchedFlight);
+                Intent intent=SearchResultsActivity.intentFactory(getApplicationContext(),searchedFlight.getDestination(),searchedFlight.getOrigin(),searchedFlight.getDate(),mUser.getUserName());
                 startActivity(intent);
 
                 //submitFlight();
-                //refreshDisplay();
+                refreshDisplay();
             }
         });
 
@@ -117,20 +119,24 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Update to use Bookings
 
-//    private void refreshDisplay() {
-//        mFlightList = mFlightDAO.getFlights();
-//        if (!mFlightList.isEmpty()) {
-//            StringBuilder sb = new StringBuilder();
-//            for (Flight log : mFlightList) {
-//                sb.append(log.toString());
-//            }
-//            mMainDisplay.setText(sb.toString());
-//        } else {
-//            mMainDisplay.setText("No Bookings");
-//
-//        }
-//
-//    }
+    private void refreshDisplay() {
+        mBookingList = mFlightDAO.getBookingByUserId(mUserId);
+
+        if (!mBookingList.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (Booking booking :  mBookingList) {
+                sb.append("Booking ID:"+booking.getBookingId()+"\n"+
+                        "Flight Info: \n"+
+                        mFlightDAO.getFlightById(booking.getFlightID())+"\n" +
+                        "Quantity:"+booking.getQuantity());
+            }
+            mMainDisplay.setText(sb.toString());
+        } else {
+            mMainDisplay.setText("No Bookings");
+
+        }
+
+    }
 
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(mUser != null){
@@ -239,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getPrefs() {
-        mPreferences = this.getSharedPreferences(PREFENCES_KEY,Context.MODE_PRIVATE);
+        mPreferences = this.getSharedPreferences(PREFERENCE_KEY,Context.MODE_PRIVATE);
     }
 
     private void logoutUser(){
@@ -281,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
         }
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putInt(USER_ID_KEY,userId);
+        editor.commit();
     }
 
     private void getDataBase() {

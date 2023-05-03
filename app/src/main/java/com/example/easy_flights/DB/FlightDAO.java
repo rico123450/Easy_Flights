@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.easy_flights.Booking;
 import com.example.easy_flights.Flight;
 import com.example.easy_flights.User;
 
@@ -29,6 +30,9 @@ public interface FlightDAO {
     @Query("SELECT * FROM "+ AppDataBase.FLIGHT_TABLE + " WHERE mFlightId = :flightId")
     List<Flight> getFlightById(int flightId);
 
+    @Query("SELECT * FROM "+ AppDataBase.FLIGHT_TABLE+" WHERE mDestination LIKE :destination AND mOrigin LIKE :origin")
+    List<Flight> getFlightByDestinationOrigin(String destination,String origin);
+
     @Insert
     void insert(User...users);
 
@@ -46,6 +50,20 @@ public interface FlightDAO {
 
     @Query("SELECT * FROM " + AppDataBase.USER_TABLE+ " WHERE mUserId = :userId")
     User getUserByUserId(int userId);
+
+
+    @Insert
+    void insert(Booking...bookings);
+    @Update
+    void update(Booking...bookings);
+
+    @Delete
+    void delete(Booking booking);
+
+
+
+    @Query("SELECT * FROM " + AppDataBase.BOOKING_TABLE+" WHERE mUserId=:userId")
+    List<Booking> getBookingByUserId(int userId);
 
 
 }
