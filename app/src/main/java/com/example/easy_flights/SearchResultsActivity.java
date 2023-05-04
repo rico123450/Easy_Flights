@@ -188,7 +188,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
     private void bookFlight(int positionOnArray){
-        //TODO:QUANTITY NOT CHANGING KEEP ADDING NEW FLIGHTS
+        //TODO:QUANTITY NOT CHANGING KEEPS ADDING NEW FLIGHTS
         List<Booking> userBooking = mFlightDAO.getBookingByUserId(mUser.getUserId());
         for(Booking booking:userBooking){
             if(booking.getFlightID()==searchedFlight.getFlightId()){

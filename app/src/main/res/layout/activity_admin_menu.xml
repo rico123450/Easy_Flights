@@ -6,4 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".AdminMenuActivity">
 
+    <Button
+        android:id="@+id/adminAddUser"
+        android:layout_width="185dp"
+        android:layout_height="74dp"
+        android:text="@string/admin_add_a_user_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.103" />
+
+    <Button
+        android:id="@+id/adminViewUsers"
+        android:layout_width="185dp"
+        android:layout_height="74dp"
+        android:text="@string/admin_view_user_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminAddUser"
+        app:layout_constraintVertical_bias="0.223" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,4 +12,6 @@
     <string name="no">No</string>
     <string name="search_results_Title">Search Results:</string>
     <string name="bookFlight">Book flight?</string>
+    <string name="admin_add_a_user_button">Add a User</string>
+    <string name="admin_view_user_list">View All Users</string>
 </resources>
