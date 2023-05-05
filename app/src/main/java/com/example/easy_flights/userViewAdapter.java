@@ -26,9 +26,9 @@ public class userViewAdapter extends RecyclerView.Adapter<userView>{
 
     @Override
     public void onBindViewHolder(@NonNull userView holder, int position) {
-        holder.userNameView.setText(mUserList.get(position).getUserName());
-        holder.userPasswordView.setText(mUserList.get(position).getPassword());
-        holder.userIsAdmin.setText(mUserList.get(position).getAdmin().toString());
+        holder.userNameView.setText("Username:"+mUserList.get(position).getUserName());
+        holder.userPasswordView.setText("Password:"+mUserList.get(position).getPassword());
+        holder.userIsAdmin.setText("Admin:"+mUserList.get(position).getAdmin().toString());
     }
 
     @Override
