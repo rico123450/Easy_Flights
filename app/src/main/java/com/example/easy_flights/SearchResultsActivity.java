@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.view.MenuInflater;
+import android.widget.Toast;
 
 import com.example.easy_flights.DB.AppDataBase;
 import com.example.easy_flights.DB.FlightDAO;
@@ -171,6 +172,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                        bookFlight(positionOnArray);
+                        Toast.makeText(SearchResultsActivity.this, "Booked Flight", Toast.LENGTH_SHORT).show();
                     }
                 });
 
