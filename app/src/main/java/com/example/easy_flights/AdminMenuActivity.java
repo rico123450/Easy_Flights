@@ -8,9 +8,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.easy_flights.DB.AppDataBase;
+import com.example.easy_flights.DB.FlightDAO;
 import com.example.easy_flights.databinding.ActivityAdminMenuBinding;
 import com.example.easy_flights.databinding.ActivityMainBinding;
+
+import java.util.List;
 
 public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser.AdminAddUserListener {
     private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
@@ -22,6 +27,12 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
 
     private String entered_Username;
     private String entered_Password;
+    private static AdminMenuActivity adminMenuContext;
+
+
+
+
+
 //    AdminMenuActivity binding;
     ActivityAdminMenuBinding binding;
 
@@ -34,6 +45,7 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
         setContentView(R.layout.activity_admin_menu);
         binding=ActivityAdminMenuBinding.inflate(getLayoutInflater());
         addUserButton=(Button) findViewById(R.id.adminAddUser);
+        adminMenuContext=this;
 
         adminViewUserButton=(Button) findViewById(R.id.adminViewUsers);
 
@@ -48,6 +60,12 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
             @Override
             public void onClick(View view) {
                 openDialog();
+
+
+
+
+
+
             }
         });
 
@@ -60,6 +78,7 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
         });
 
     }
+
 
     public void openDialog() {
         AdminAddUser adminAddUser = new AdminAddUser();
@@ -76,6 +95,10 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
 
     private void getPrefs() {
         mPreferences = this.getSharedPreferences(PREFERENCE_KEY,Context.MODE_PRIVATE);
+    }
+
+     public static Context getAdminMenuActivityContext(){
+        return adminMenuContext;
     }
 
     @Override
