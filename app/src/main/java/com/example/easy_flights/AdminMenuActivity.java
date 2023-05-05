@@ -16,9 +16,9 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
     private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
     private SharedPreferences mPreferences = null;
 
-    private Button addUserButton;
+    Button addUserButton;
 
-    private Button adminViewUserButton;
+    Button adminViewUserButton;
 
     private String entered_Username;
     private String entered_Password;
@@ -26,17 +26,30 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
     ActivityAdminMenuBinding binding;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu);
+        binding=ActivityAdminMenuBinding.inflate(getLayoutInflater());
+        addUserButton=(Button) findViewById(R.id.adminAddUser);
+
+        adminViewUserButton=(Button) findViewById(R.id.adminViewUsers);
 
         getPrefs();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        binding=ActivityAdminMenuBinding.inflate(getLayoutInflater());
-        addUserButton=binding.adminAddUser;
-        adminViewUserButton=binding.adminViewUsers;
+
+
+
+
+        addUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
 
         adminViewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,18 +59,11 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
             }
         });
 
-        addUserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialog();
-
-            }
-        });
     }
 
     public void openDialog() {
         AdminAddUser adminAddUser = new AdminAddUser();
-        adminAddUser.show(getSupportFragmentManager(),"example");
+        adminAddUser.show(getSupportFragmentManager(),"AdminAddUser");
 
 
     }
