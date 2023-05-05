@@ -24,7 +24,7 @@ import com.example.easy_flights.DB.FlightDAO;
 import com.example.easy_flights.databinding.ActivityMainBinding;
 
 import java.util.List;
-
+//TODO: Change admin check from string to getting ifAdmin
 public class MainActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.easy_flights.userIdKey";
     private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";

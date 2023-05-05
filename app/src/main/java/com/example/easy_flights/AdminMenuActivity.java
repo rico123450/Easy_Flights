@@ -72,6 +72,8 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
         adminViewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = AdminUserListActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
 
 
             }
