@@ -13,10 +13,9 @@
         android:text="@string/admin_add_a_user_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.278" />
 
     <Button
         android:id="@+id/adminViewUsers"
@@ -28,4 +27,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddUser"
         app:layout_constraintVertical_bias="0.223" />
+
+    <TextView
+        android:id="@+id/adminMenu"
+        android:layout_width="293dp"
+        android:layout_height="131dp"
+        android:gravity="center"
+        android:text="@string/admin_menu_text"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/adminAddUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
