@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(mUser!=null && mUser.getUserName().equals("admin2")){
+        if(mUser!=null && mUser.getAdmin()){
             mAdmin.setVisibility(View.VISIBLE);
             mAdminButton.setVisibility(View.VISIBLE);
             // mA=true;
