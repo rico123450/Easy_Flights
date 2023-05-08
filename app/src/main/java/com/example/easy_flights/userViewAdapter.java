@@ -17,7 +17,7 @@ import com.example.easy_flights.DB.AppDataBase;
 import com.example.easy_flights.DB.FlightDAO;
 
 import java.util.List;
-
+//TODO: How update Recycler View when removing user/changing admin privileges
 public class userViewAdapter extends RecyclerView.Adapter<userView> implements View.OnClickListener{
     private OnUserClickListener mListener;
 
@@ -95,7 +95,29 @@ public class userViewAdapter extends RecyclerView.Adapter<userView> implements V
         uIDView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Can't change ID", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AdminUserListActivity.getAdminUserListActivityContext());
+
+                alertBuilder.setMessage("Remove User?");
+
+                alertBuilder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                currentUser.setAdmin(!(currentUser.getAdmin()));
+                                mFlightDAO.delete(currentUser);
+                                Toast.makeText(mContext, "User removed", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                alertBuilder.setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //
+                            }
+                        });
+                alertBuilder.create().show();
             }
         });
 
