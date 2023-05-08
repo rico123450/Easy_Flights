@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordField;
     private Button mButton;
 
+    private Button mSignUpButton;
+
     private FlightDAO mFlightDAO;
 
     private String mUsername;
@@ -40,8 +42,10 @@ public class LoginActivity extends AppCompatActivity {
     private void wireupDisplay(){
         mUsernameField =findViewById(R.id.editTextLoginUserName);
         mPasswordField = findViewById(R.id.editTextLoginPassword);
-
+        mSignUpButton=findViewById(R.id.buttonSignUp);
         mButton = findViewById(R.id.buttonLogin);
+
+
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +62,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+        mSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = SignUpActivity.intentFactory(getApplicationContext());
+                startActivity((intent));
             }
         });
     }
