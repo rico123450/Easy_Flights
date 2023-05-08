@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easy_Flights</string>
+    <string name="app_name">Easy Flights</string>
     <string name="mainFlightOrigin">Enter Origin</string>
     <string name="mainDestinationHint">Enter Destination</string>
     <string name="mainDateHint">Enter Date</string>
