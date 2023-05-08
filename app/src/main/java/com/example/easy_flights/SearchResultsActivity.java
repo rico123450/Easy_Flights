@@ -112,7 +112,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             }
         });
 
-//        backButton.setOnClickListener(new View.OnClickListener() {
+//        backButton.setOnClickListener(new View.OnUserClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //               Intent intent = MainActivity.intentFactory(getApplicationContext(),mUser.getUserId());
