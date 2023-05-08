@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.view.MenuInflater;
+import android.widget.Toast;
 
 import com.example.easy_flights.DB.AppDataBase;
 import com.example.easy_flights.DB.FlightDAO;
@@ -111,7 +112,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             }
         });
 
-//        backButton.setOnClickListener(new View.OnClickListener() {
+//        backButton.setOnClickListener(new View.OnUserClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //               Intent intent = MainActivity.intentFactory(getApplicationContext(),mUser.getUserId());
@@ -171,6 +172,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                        bookFlight(positionOnArray);
+                        Toast.makeText(SearchResultsActivity.this, "Booked Flight", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -188,7 +190,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
     private void bookFlight(int positionOnArray){
-        //TODO:QUANTITY NOT CHANGING KEEP ADDING NEW FLIGHTS
+        //TODO:QUANTITY NOT CHANGING KEEPS ADDING NEW FLIGHTS
         List<Booking> userBooking = mFlightDAO.getBookingByUserId(mUser.getUserId());
         for(Booking booking:userBooking){
             if(booking.getFlightID()==searchedFlight.getFlightId()){

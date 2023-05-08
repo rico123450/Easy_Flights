@@ -4,16 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 public class AccountInfoActivity extends AppCompatActivity {
     private User mUser;
 
+    private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
+    private SharedPreferences mPreferences = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_info);
+        getPrefs();
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -22,4 +28,8 @@ public class AccountInfoActivity extends AppCompatActivity {
 
         return intent;
     }
+    private void getPrefs() {
+        mPreferences = this.getSharedPreferences(PREFERENCE_KEY,Context.MODE_PRIVATE);
+    }
+
 }

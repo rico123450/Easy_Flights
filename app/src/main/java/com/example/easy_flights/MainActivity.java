@@ -24,7 +24,7 @@ import com.example.easy_flights.DB.FlightDAO;
 import com.example.easy_flights.databinding.ActivityMainBinding;
 
 import java.util.List;
-
+//TODO: Change admin check from string to getting ifAdmin
 public class MainActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.easy_flights.userIdKey";
     private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(mUser!=null && mUser.getUserName().equals("admin2")){
+        if(mUser!=null && mUser.getAdmin()){
             mAdmin.setVisibility(View.VISIBLE);
             mAdminButton.setVisibility(View.VISIBLE);
             // mA=true;
@@ -106,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
             mAdminButton.setVisibility(View.GONE);
             //isAdmin=false;
         }
+
+        mAdminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=AdminMenuActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     public static Intent intentFactory(Context context, int userId){
@@ -222,8 +230,8 @@ public class MainActivity extends AppCompatActivity {
 
         List<User>users = mFlightDAO.getAllUsers();
         if(users.size() <=0){
-            User defaultUser =  new User("testuser1","123");
-            User altUser = new User("admin2", "123");
+            User defaultUser =  new User("testuser1","123",false);
+            User altUser = new User("admin2", "123",true);
             mFlightDAO.insert(defaultUser);
             mFlightDAO.insert(altUser);
         }

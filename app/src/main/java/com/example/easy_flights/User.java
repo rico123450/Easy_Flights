@@ -14,10 +14,24 @@ public class User {
 
     private String mPassword;
 
-    public User( String userName, String password) {
+    private Boolean isAdmin;
+
+    public User( String userName, String password,Boolean isAdmin) {
 
         mUserName = userName;
         mPassword = password;
+        this.isAdmin=isAdmin;
+    }
+
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     public int getUserId() {
