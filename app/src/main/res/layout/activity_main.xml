@@ -97,6 +97,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainSubmitButton" />
 
+    <Button
+        android:id="@+id/button_RemoveBookingButton"
+        android:layout_width="212dp"
+        android:layout_height="66dp"
+        android:text="Remove a Booking"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainDateEditText"
+        app:layout_constraintVertical_bias="0.244" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
