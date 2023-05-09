@@ -192,15 +192,20 @@ public class SearchResultsActivity extends AppCompatActivity {
     private void bookFlight(int positionOnArray){
         //TODO:QUANTITY NOT CHANGING KEEPS ADDING NEW FLIGHTS
         List<Booking> userBooking = mFlightDAO.getBookingByUserId(mUser.getUserId());
+        Booking currentBooking=new Booking(mUser.getUserId(),mFlightList.get(positionOnArray).getFlightId(),1);
         for(Booking booking:userBooking){
-            if(booking.getFlightID()==searchedFlight.getFlightId()){
-                booking.setQuantity(booking.getQuantity()+1);
+            if(currentBooking.equals(booking)){
+                System.out.println("ENTERED");
+                currentBooking.setQuantity(currentBooking.getQuantity()+1);
+                mFlightDAO.update(currentBooking);
                 return;
             }
         }
-        System.out.println("ENTERED OUTSIDE");
-        Booking currentBooking= new Booking(mUser.getUserId(),mFlightList.get(positionOnArray).getFlightId(),1);
-        mFlightDAO.insert(currentBooking);
+
+
+
+            mFlightDAO.insert(currentBooking);
+
     }
 
 

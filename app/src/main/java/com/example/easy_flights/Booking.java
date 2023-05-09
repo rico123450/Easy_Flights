@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.easy_flights.DB.AppDataBase;
 
+import java.util.Objects;
+
 @Entity(tableName = AppDataBase.BOOKING_TABLE)
 public class Booking {
 
@@ -52,5 +54,16 @@ public class Booking {
         mBookingId = bookingId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking booking = (Booking) o;
+        return mUserId == booking.mUserId && mFlightID == booking.mFlightID;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(mUserId, mFlightID);
+    }
 }
