@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String reEnteredPassword=mReEnterPasswordField.getText().toString();
 
                 if((mFlightDAO.getUserByUsername(userName)!=null)){
-                    Toast.makeText(getApplicationContext(), "A user with the username"+userName+" already exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "A user with the username \""+userName+"\" already exist", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(!passWord.equals(reEnteredPassword)){

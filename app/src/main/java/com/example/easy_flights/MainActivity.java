@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 sb.append("Booking ID:"+booking.getBookingId()+"\n"+
                         "Flight Info: \n"+
                         mFlightDAO.getFlightsById(booking.getFlightID())+"\n" +
-                        "Quantity:"+booking.getQuantity()+"\n"+"\n");
+                        "Total Booked:"+booking.getQuantity()+"\n"+"\n");
             }
             mMainDisplay.setText(sb.toString());
         } else {

@@ -38,10 +38,17 @@
             android:text="Flight Date"
             android:textColor="@color/black"
             android:layout_below="@id/recRemoveUserFlightDest"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recRemoveUserBookingCapacity"
+            android:text="Booking Capacity"
+            android:textColor="@color/black"
+            android:layout_below="@id/recRemoveUserFlightDate"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="100dp"
             android:background="@color/black"/>
 
 

@@ -25,6 +25,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         public TextView mTextViewFlightDest;
         public TextView mTextViewFlightDate;
 
+        public TextView mTextViewBookingCapacity;
+
 
 
 
@@ -35,6 +37,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
             mTextViewFlightDate=itemView.findViewById(R.id.recRemoveUserFlightDate);
             mTextViewFlightDest=itemView.findViewById(R.id.recRemoveUserFlightDest);
             mTextViewFlightOrigin=itemView.findViewById(R.id.recRemoveUserFlightOrigin);
+            mTextViewBookingCapacity=itemView.findViewById(R.id.recRemoveUserBookingCapacity);
 
         }
     }
@@ -57,10 +60,11 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         mFlightDAO = AppDataBase.getInstance(RemoveBookingActivity.getRemoveBookingActivityContext()).FlightDAO();
 
         Flight flight = mFlightDAO.getFlightById(currentBooking.getFlightID());
-        holder.mTextViewFlightDest.setText(flight.getDestination());
-        holder.mTextViewFlightOrigin.setText(flight.getOrigin());
-        holder.mTextViewBookingID.setText(Integer.toString(currentBooking.getBookingId()));
-        holder.mTextViewFlightDate.setText(flight.getDate());
+        holder.mTextViewFlightDest.setText("Destination: "+flight.getDestination());
+        holder.mTextViewFlightOrigin.setText("Origin: "+flight.getOrigin());
+        holder.mTextViewBookingID.setText("Booking ID:"+Integer.toString(currentBooking.getBookingId()));
+        holder.mTextViewFlightDate.setText("Date: "+flight.getDate());
+        holder.mTextViewBookingCapacity.setText("Total Booked: "+currentBooking.getQuantity());
 
 
     }
