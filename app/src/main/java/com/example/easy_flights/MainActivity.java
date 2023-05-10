@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             for (Booking booking :  mBookingList) {
                 sb.append("Booking ID:"+booking.getBookingId()+"\n"+
                         "Flight Info: \n"+
-                        mFlightDAO.getFlightById(booking.getFlightID())+"\n" +
+                        mFlightDAO.getFlightsById(booking.getFlightID())+"\n" +
                         "Quantity:"+booking.getQuantity()+"\n"+"\n");
             }
             mMainDisplay.setText(sb.toString());
