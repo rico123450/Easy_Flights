@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.TextViewAccountInfo:
 //                System.out.println("USERNAME="+mUser.getUserName());
-                Intent intent = AccountInfoActivity.intentFactory(this,mUser.getUserName());
+                Intent intent = AccountInfoActivity.intentFactory(this,mUser.getUserId());
 
 
                 startActivity(intent);

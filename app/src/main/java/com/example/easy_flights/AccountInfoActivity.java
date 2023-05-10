@@ -17,11 +17,15 @@ import com.example.easy_flights.DB.AppDataBase;
 import com.example.easy_flights.DB.FlightDAO;
 import com.example.easy_flights.databinding.ActivityAccountInfoBinding;
 
+import java.util.List;
+
 public class AccountInfoActivity extends AppCompatActivity {
     private User mUser;
 
     private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
     private SharedPreferences mPreferences = null;
+
+    private static final String USER_ID_KEY = "com.example.easy_flights.userIdKey";
 
     private String mUserName;
 
@@ -36,9 +40,15 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     private Button mDeleteAccountButton;
 
+    private int mUserId;
+
     ActivityAccountInfoBinding binding;
 
+
+
     AccountInfoActivity mAccountInfoActivityContext;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +58,7 @@ public class AccountInfoActivity extends AppCompatActivity {
         getPrefs();
         sortData();
         mFlightDAO = AppDataBase.getInstance(getApplicationContext()).FlightDAO();
-        mUser=mFlightDAO.getUserByUsername(mUserName);
+        mUser=mFlightDAO.getUserByUserId(mUserId);
 
 //        System.out.println("\n\n\n\n\n\nUSERNAME="+mUserName+"\n\n\n\n\n\n");
 
@@ -74,6 +84,7 @@ public class AccountInfoActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                logOut();
                                 mFlightDAO.delete(mUser);
                                 Intent intent = LoginActivity.intentFactory(getApplicationContext());
                                 startActivity(intent);
@@ -97,17 +108,90 @@ public class AccountInfoActivity extends AppCompatActivity {
 
     }
 
-    private void sortData(){
-        mUserName=getIntent().getStringExtra(USER_NAME_KEY);
+    public void logOut(){
+        //TODO: IMPLEMENT THESE FUNCTIONS FROM MAIN ACTIVITY
+        clearUserFromIntent();
+        clearUserFromPref();
+        mUserId = -1;
+        checkForUser();
     }
 
-    public static Intent intentFactory(Context context,String userName){
+    private void sortData(){
+        mUserId=getIntent().getIntExtra(USER_ID_KEY,-1);
+    }
+
+    public static Intent intentFactory(Context context,int userId){
         Intent intent = new Intent(context,AccountInfoActivity.class);
-        intent.putExtra(USER_NAME_KEY,userName);
+        intent.putExtra(USER_ID_KEY,userId);
         return intent;
     }
     private void getPrefs() {
         mPreferences = this.getSharedPreferences(PREFERENCE_KEY,Context.MODE_PRIVATE);
+    }
+
+    private void checkForUser() {
+        //Do we have user in intent?
+        mUserId=getIntent().getIntExtra(USER_ID_KEY,-1);
+
+        if(mUserId !=-1){
+            return;
+
+
+        }
+
+        if(mPreferences==null){
+            getPrefs();
+        }
+        mUserId = mPreferences.getInt(USER_ID_KEY,-1);
+
+
+
+        if(mUserId != -1){
+            return;
+        }
+
+
+        List<User> users = mFlightDAO.getAllUsers();
+        if(users.size() <=0){
+            User defaultUser =  new User("testuser1","123",false);
+            User altUser = new User("admin2", "123",true);
+            mFlightDAO.insert(defaultUser);
+            mFlightDAO.insert(altUser);
+        }
+
+        //TODO: See if this is working as intended
+        List<Flight>flights = mFlightDAO.getFlights();
+
+        if(flights.size()<=0){
+            Flight defaultFlight1= new Flight("San Jose","San Francisco","8/1/23");
+            Flight defaultFlight2 = new Flight("San Francisco","San Jose","8/1/23");
+            mFlightDAO.insert(defaultFlight1);
+            mFlightDAO.insert(defaultFlight2);
+        }
+
+        Intent intent = LoginActivity.intentFactory(this);
+        startActivity(intent);
+        //Do we have user in the preferences?
+
+    }
+
+    private void clearUserFromIntent(){
+        getIntent().putExtra(USER_ID_KEY,-1);
+    }
+
+    private void clearUserFromPref() {
+        addUserToPreference(-1);
+    }
+
+
+
+    private void addUserToPreference(int userId) {
+        if(mPreferences==null){
+            getPrefs();
+        }
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(USER_ID_KEY,userId);
+        editor.commit();
     }
 
 }
