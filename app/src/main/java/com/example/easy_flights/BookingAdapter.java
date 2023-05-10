@@ -18,6 +18,18 @@ import java.util.List;
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
     private List<Booking>mBookingArrayList;
 
+
+
+    public interface OnBookingClickListener{
+        void onBookingClick(int position);
+    }
+
+    private OnBookingClickListener mOnBookingClickListener;
+
+    public void setOnBookingClickListener(OnBookingClickListener listener){
+        mOnBookingClickListener=listener;
+    }
+
     private FlightDAO mFlightDAO;
     public static class BookingViewHolder extends RecyclerView.ViewHolder{
         public TextView mTextViewBookingID;
@@ -31,13 +43,26 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
 
 
 
-        public BookingViewHolder(@NonNull View itemView) {
+        public BookingViewHolder(@NonNull View itemView,OnBookingClickListener listener) {
             super(itemView);
             mTextViewBookingID=itemView.findViewById(R.id.recRemoveUserBookingID);
             mTextViewFlightDate=itemView.findViewById(R.id.recRemoveUserFlightDate);
             mTextViewFlightDest=itemView.findViewById(R.id.recRemoveUserFlightDest);
             mTextViewFlightOrigin=itemView.findViewById(R.id.recRemoveUserFlightOrigin);
             mTextViewBookingCapacity=itemView.findViewById(R.id.recRemoveUserBookingCapacity);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onBookingClick(position);
+                        }
+
+                    }
+                }
+            });
 
         }
     }
@@ -50,7 +75,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
     @Override
     public BookingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.booking_item,parent,false);
-        BookingViewHolder bvh=new BookingViewHolder(v);
+        BookingViewHolder bvh=new BookingViewHolder(v,mOnBookingClickListener);
         return bvh;
     }
 
@@ -73,4 +98,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
     public int getItemCount() {
         return mBookingArrayList.size();
     }
+
+
 }
