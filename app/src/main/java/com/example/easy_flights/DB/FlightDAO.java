@@ -28,7 +28,11 @@ public interface FlightDAO {
     List<Flight> getFlights();
 
     @Query("SELECT * FROM "+ AppDataBase.FLIGHT_TABLE + " WHERE mFlightId = :flightId")
-    List<Flight> getFlightById(int flightId);
+    List<Flight> getFlightsById(int flightId);
+
+
+    @Query("SELECT * FROM "+ AppDataBase.FLIGHT_TABLE + " WHERE mFlightId = :flightId")
+    Flight getFlightById(int flightId);
 
     @Query("SELECT * FROM "+ AppDataBase.FLIGHT_TABLE+" WHERE mDestination LIKE :destination AND mOrigin LIKE :origin")
     List<Flight> getFlightByDestinationOrigin(String destination,String origin);

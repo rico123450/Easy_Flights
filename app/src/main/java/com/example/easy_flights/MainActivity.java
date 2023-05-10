@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private User mUser;
 
     private Button mAdminButton;
+
+    private Button removeBookingButton;
     List<Flight> mFlightList;
 
     ActivityMainBinding binding;
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         mOrigin = binding.mainOriginEditText;
         mDestination = binding.mainDestinationEditText;
         mDate = binding.mainDateEditText;
+        removeBookingButton=binding.buttonRemoveBookingButton;
 
         mAdmin = findViewById(R.id.textView_admin);
         mAdminButton = binding.adminButton;
@@ -94,6 +97,16 @@ public class MainActivity extends AppCompatActivity {
 
                 //submitFlight();
                 refreshDisplay();
+            }
+        });
+        removeBookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = RemoveBookingActivity.intentFactory(getApplicationContext(),mUser.getUserName());
+                startActivity(intent);
+
+
+
             }
         });
 
@@ -135,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
             for (Booking booking :  mBookingList) {
                 sb.append("Booking ID:"+booking.getBookingId()+"\n"+
                         "Flight Info: \n"+
-                        mFlightDAO.getFlightById(booking.getFlightID())+"\n" +
-                        "Quantity:"+booking.getQuantity()+"\n"+"\n");
+                        mFlightDAO.getFlightsById(booking.getFlightID())+"\n" +
+                        "Total Booked:"+booking.getQuantity()+"\n"+"\n");
             }
             mMainDisplay.setText(sb.toString());
         } else {
