@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/AccountInfo"
+        android:id="@+id/TextViewAccountInfo"
         android:layout_width="222dp"
         android:layout_height="49dp"
         android:text="Account Info"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.061" />
 
     <TextView
-        android:id="@+id/displayUser"
+        android:id="@+id/TextViewDisplayUser"
         android:layout_width="94dp"
         android:layout_height="54dp"
         android:text="Username"
@@ -31,11 +31,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AccountInfo"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewAccountInfo"
         app:layout_constraintVertical_bias="0.057" />
 
     <TextView
-        android:id="@+id/displayPassword"
+        android:id="@+id/TextViewDisplayPassword"
         android:layout_width="94dp"
         android:layout_height="54dp"
         android:text="Password"
@@ -44,11 +44,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/displayUser"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewDisplayUser"
         app:layout_constraintVertical_bias="0.196" />
 
     <TextView
-        android:id="@+id/displayUserId"
+        android:id="@+id/TextViewDisplayUserId"
         android:layout_width="94dp"
         android:layout_height="54dp"
         android:layout_marginBottom="224dp"
@@ -58,8 +58,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/displayPassword"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewDisplayPassword"
         app:layout_constraintVertical_bias="0.889" />
+
+    <Button
+        android:id="@+id/userRemoveOwnAccount"
+        android:layout_width="120dp"
+        android:layout_height="61dp"
+        android:text="Delete Account"
+        app:backgroundTint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewDisplayUserId" />
 
 
     <!--    <TextView-->

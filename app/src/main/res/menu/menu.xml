@@ -6,7 +6,7 @@
         android:title="USER"
         app:showAsAction="ifRoom"
         ></item>
-    <item android:id="@+id/AccountInfo"
+    <item android:id="@+id/TextViewAccountInfo"
         android:title="Account Info"
         app:showAsAction="never"
         ></item>

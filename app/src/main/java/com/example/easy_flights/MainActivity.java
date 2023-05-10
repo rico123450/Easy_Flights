@@ -331,8 +331,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.userMenuLogout:
                 logoutUser();
                 return true;
-            case R.id.AccountInfo:
-                Intent intent = AccountInfoActivity.intentFactory(this);
+            case R.id.TextViewAccountInfo:
+//                System.out.println("USERNAME="+mUser.getUserName());
+                Intent intent = AccountInfoActivity.intentFactory(this,mUser.getUserName());
 
 
                 startActivity(intent);
