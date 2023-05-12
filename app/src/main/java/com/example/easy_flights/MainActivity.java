@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mAdminButton;
 
     private Button removeBookingButton;
+
+    private TextView textViewUserID;
     List<Flight> mFlightList;
 
     ActivityMainBinding binding;
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         mDestination = binding.mainDestinationEditText;
         mDate = binding.mainDateEditText;
         removeBookingButton=binding.buttonRemoveBookingButton;
+       textViewUserID=binding.mainActivityUserIDDisplay;
+
 
         mAdmin = findViewById(R.id.textView_admin);
         mAdminButton = binding.adminButton;
@@ -86,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 //        mFlightDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME).allowMainThreadQueries().fallbackToDestructiveMigration().build().FlightDAO();
         mFlightDAO = AppDataBase.getInstance(getApplicationContext()).FlightDAO();
         refreshDisplay();
+
+       textViewUserID.setText("User ID: "+Integer.toString(mUserId));
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,6 +326,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginUser(int userId) {
         mUser=mFlightDAO.getUserByUserId(userId);
+
 
 
         invalidateOptionsMenu();
