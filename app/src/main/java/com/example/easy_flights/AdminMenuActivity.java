@@ -29,6 +29,8 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
     private String entered_Password;
     private static AdminMenuActivity adminMenuContext;
 
+    Button addFlightButton;
+
 
 
 
@@ -45,7 +47,9 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
         setContentView(R.layout.activity_admin_menu);
         binding=ActivityAdminMenuBinding.inflate(getLayoutInflater());
         addUserButton=(Button) findViewById(R.id.adminAddUser);
+        addFlightButton=(Button) findViewById(R.id.adminAddFlight);
         adminMenuContext=this;
+
 
         adminViewUserButton=(Button) findViewById(R.id.adminViewUsers);
 
@@ -54,6 +58,14 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
 
 
 
+
+        addFlightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = AdminAddFlightActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
 
 
 

@@ -17,6 +17,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.278" />
 
+
+    <Button
+        android:id="@+id/adminRemoveFlight"
+        android:layout_width="185dp"
+        android:layout_height="74dp"
+        android:text="Remove a Flight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminAddUser"
+        app:layout_constraintVertical_bias="0.747" />
+
     <Button
         android:id="@+id/adminViewUsers"
         android:layout_width="185dp"
@@ -26,7 +38,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddUser"
-        app:layout_constraintVertical_bias="0.223" />
+        app:layout_constraintVertical_bias="0.135" />
+
+    <Button
+        android:id="@+id/adminAddFlight"
+        android:layout_width="185dp"
+        android:layout_height="74dp"
+        android:text="Add a Flight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminViewUsers"
+        app:layout_constraintVertical_bias="0.121" />
 
     <TextView
         android:id="@+id/adminMenu"
