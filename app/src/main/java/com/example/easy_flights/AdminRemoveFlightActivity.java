@@ -18,7 +18,7 @@ public class AdminRemoveFlightActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
 
-    private RecyclerView.Adapter mAdapter;
+    private FlightAdapter mAdapter;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private static final String PREFERENCE_KEY = "com.example.easy_flights.PREFERENCE_KEY";
@@ -45,6 +45,13 @@ public class AdminRemoveFlightActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnFlightClickListener(new FlightAdapter.OnFlightClickListener() {
+            @Override
+            public void onFlightClick(int position) {
+
+            }
+        });
 
 
 
