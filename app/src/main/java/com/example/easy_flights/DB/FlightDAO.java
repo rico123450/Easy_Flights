@@ -69,5 +69,8 @@ public interface FlightDAO {
     @Query("SELECT * FROM " + AppDataBase.BOOKING_TABLE+" WHERE mUserId=:userId")
     List<Booking> getBookingByUserId(int userId);
 
+    @Query("SELECT * FROM " + AppDataBase.BOOKING_TABLE+" WHERE mFlightID=:FlightID")
+    List<Booking> getBookingByFlightId(int FlightID);
+
 
 }

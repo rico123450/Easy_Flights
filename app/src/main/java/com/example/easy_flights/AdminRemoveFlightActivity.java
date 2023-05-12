@@ -1,13 +1,16 @@
 package com.example.easy_flights;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.easy_flights.DB.AppDataBase;
 import com.example.easy_flights.DB.FlightDAO;
@@ -27,12 +30,15 @@ public class AdminRemoveFlightActivity extends AppCompatActivity {
 
     List<Flight> mFlightList;
 
+    AdminRemoveFlightActivity AdminRemoveFlightActivityContext;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_remove_flight);
+        AdminRemoveFlightActivityContext=this;
         getPrefs();
         mFlightDAO = AppDataBase.getInstance(getApplicationContext()).FlightDAO();
 
@@ -49,6 +55,28 @@ public class AdminRemoveFlightActivity extends AppCompatActivity {
         mAdapter.setOnFlightClickListener(new FlightAdapter.OnFlightClickListener() {
             @Override
             public void onFlightClick(int position) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AdminRemoveFlightActivityContext);
+
+                alertBuilder.setMessage("Remove this flight? (This can't be undone...)");
+
+                alertBuilder.setPositiveButton(getString(R.string.yes),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                removeFlight(position);
+                                Toast.makeText(getApplicationContext(), "Booking removed", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                alertBuilder.setNegativeButton(getString(R.string.no),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //
+                            }
+                        });
+                alertBuilder.create().show();
 
             }
         });
@@ -59,6 +87,19 @@ public class AdminRemoveFlightActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void removeFlight(int pos){
+        Flight currentFlight = mFlightList.get(pos);
+        List<Booking> mBookingList =mFlightDAO.getBookingByFlightId(currentFlight.getFlightId());
+        for(Booking currentBooking:mBookingList){
+            mFlightDAO.delete(currentBooking);
+        }
+        mFlightDAO.delete(currentFlight);
+        mFlightList.remove(pos);
+        mAdapter.notifyDataSetChanged();
+
+
     }
     public static Intent intentFactory(Context context){
         Intent intent = new Intent(context,AdminRemoveFlightActivity.class);
