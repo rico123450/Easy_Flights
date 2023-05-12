@@ -65,7 +65,6 @@
         android:layout_height="79dp"
         android:ems="10"
         android:hint="Flight Date (__/__/____)"
-        android:inputType="date"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/addFlightButton"
         app:layout_constraintEnd_toEndOf="parent"
