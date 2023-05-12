@@ -25,6 +25,8 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
 
     Button adminViewUserButton;
 
+    Button adminRemoveFlightButton;
+
     private String entered_Username;
     private String entered_Password;
     private static AdminMenuActivity adminMenuContext;
@@ -48,10 +50,14 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
         binding=ActivityAdminMenuBinding.inflate(getLayoutInflater());
         addUserButton=(Button) findViewById(R.id.adminAddUser);
         addFlightButton=(Button) findViewById(R.id.adminAddFlight);
+        adminRemoveFlightButton=(Button) findViewById(R.id.adminRemoveFlight);
+
         adminMenuContext=this;
 
 
         adminViewUserButton=(Button) findViewById(R.id.adminViewUsers);
+
+
 
         getPrefs();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,6 +72,16 @@ public class AdminMenuActivity extends AppCompatActivity implements AdminAddUser
                 startActivity(intent);
             }
         });
+
+        adminRemoveFlightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = AdminRemoveFlightActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
