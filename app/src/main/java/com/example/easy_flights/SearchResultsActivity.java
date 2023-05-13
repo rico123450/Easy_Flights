@@ -88,10 +88,12 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         searchedFlight=new Flight(mFlightDestination,mFlightOrigin,mDate);
 
+        System.out.println("\n\n\n"+searchedFlight+"\n\n\n");
+
         if(searchedFlight.getDate().equals("")){
             mFlightList = mFlightDAO.getFlightByDestinationOrigin(searchedFlight.getDestination(), searchedFlight.getOrigin());
         }else{
-            mFlightList=mFlightDAO.getFlights();
+            mFlightList=mFlightDAO.getFlightByDestinationOriginDate(searchedFlight.getDestination(), searchedFlight.getOrigin(),searchedFlight.getDate());
         }
 
 
